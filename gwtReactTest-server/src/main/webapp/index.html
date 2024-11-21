@@ -64,8 +64,12 @@
         }
         
         function test() {
+           // Get data via JSNI
            const personData = window.getExampleArray();
-            document.getElementById("react_holder").appendChild(Persons(personData));
+           document.getElementById("react_holder").appendChild(Persons(personData));
+           // Get data via JsInterop
+           const personData2 = net.spiffymap.Utils2.getExampleArray();
+           document.getElementById("react_holder").appendChild(Persons(personData2));
         }
     </script>
 
