@@ -5,86 +5,103 @@
 <!-- with a "Quirks Mode" doctype is not supported. -->
 
 <html>
-  <head>
-    <!--                                                               -->
-    <!-- Consider inlining CSS to reduce the number of requested files -->
-    <!--                                                               -->
-    <link type="text/css" rel="stylesheet" href="gwtReactTest.css">
-    <meta charset=UTF-8>
-    
-    <!-- Add React -->
-    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
-    <!--                                           -->
-    <!-- This script loads your compiled module.   -->
-    <!-- If you add any GWT meta tags, they must   -->
-    <!-- be added before this line.                -->
-    <!--                                           -->
-    <script src="app/app.nocache.js"></script>
+    <head>
+        <!--                                                               -->
+        <!-- Consider inlining CSS to reduce the number of requested files -->
+        <!--                                                               -->
+        <link type="text/css" rel="stylesheet" href="gwtReactTest.css">
+        <meta charset=UTF-8>
+        <!--                                           -->
+        <!-- This script loads your compiled module.   -->
+        <!-- If you add any GWT meta tags, they must   -->
+        <!-- be added before this line.                -->
+        <!--                                           -->
+        <script src="app/app.nocache.js"></script>
+
+        <!--                                           -->
+        <!-- Any title is fine                         -->
+        <!--                                           -->
+        <title>Web Application Starter Project</title>
+    </head>
 
     <!--                                           -->
-    <!-- Any title is fine                         -->
+    <!-- The body can have arbitrary html, or      -->
+    <!-- you can leave the body empty if you want  -->
+    <!-- to create a completely dynamic UI.        -->
     <!--                                           -->
-    <title>Web Application Starter Project</title>
-  </head>
+    <body>
 
-  <!--                                           -->
-  <!-- The body can have arbitrary html, or      -->
-  <!-- you can leave the body empty if you want  -->
-  <!-- to create a completely dynamic UI.        -->
-  <!--                                           -->
-  <body>
+        <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+        <noscript>
+        <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+            Your web browser must have JavaScript enabled
+            in order for this application to display correctly.
+        </div>
+        </noscript>
 
-    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
-    <noscript>
-      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
-        Your web browser must have JavaScript enabled
-        in order for this application to display correctly.
-      </div>
-    </noscript>
-
-    <h1>Web Application Starter Project</h1>
-    <div id="react_holder">Test</div>
-    <script>        
-        function Person(personData) {
-            const entry = document.createElement("li");
-            const text = document.createTextNode(personData.getId() + " " + personData.getForename() +
-                    " " + personData.getSurname());
-            entry.appendChild(text);
-            return entry;
-        }
-        
-        function Persons(personsList) {
-            const list = document.createElement("ul");
-            for(var i = 0; i < personsList.length; i++) {
-                const personData = personsList[i];
-                list.appendChild(Person(personData));
+        <h1>Web Application Starter Project</h1>
+        <div id="react_holder">Test</div>
+        <!-- Normal JavaScript -->
+        <script>
+            function Person(personData) {
+                const entry = document.createElement("li");
+                const text = document.createTextNode(personData.getId() + " " + personData.getForename() +
+                        " " + personData.getSurname());
+                entry.appendChild(text);
+                return entry;
             }
-            return list;
-        }
-        
-        function test() {
-           // Get data via JSNI
-           const personData = window.getExampleArray();
-           document.getElementById("react_holder").appendChild(Persons(personData));
-           // Get data via JsInterop
-           const personData2 = net.spiffymap.Utils2.getExampleArray();
-           document.getElementById("react_holder").appendChild(Persons(personData2));
-        }
-    </script>
 
-    <table align="center">
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Please enter your name:</td>        
-      </tr>
-      <tr>
-        <td id="nameFieldContainer"></td>
-        <td id="sendButtonContainer"></td>
-      </tr>
-      <tr>
-        <td colspan="2" style="color:red;" id="errorLabelContainer"></td>
-      </tr>
-    </table>
-    <button onclick="test()">Test GWT</button>
-  </body>
+            function Persons(personsList) {
+                const list = document.createElement("ul");
+                for (var i = 0; i < personsList.length; i++) {
+                    const personData = personsList[i];
+                    list.appendChild(Person(personData));
+                }
+                return list;
+            }
+
+            function test() {
+                // Get data via JSNI
+                const personData = window.getExampleArray();
+                document.getElementById("react_holder").appendChild(Persons(personData));
+                // Get data via JsInterop
+                const personData2 = net.spiffymap.Utils2.getExampleArray();
+                document.getElementById("react_holder").appendChild(Persons(personData2));
+            }
+        </script>
+        <!-- babel is required in order to parse JSX -->
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+        <!-- import react.js -->
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+
+        <!-- import react-dom.js -->
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+        <!-- JSX -->
+        <div id="jsx_container"></div>
+        <script src="test.js" type="text/babel">
+        </script>
+
+        <script>
+            function clickIt() {
+                alert('test');
+                test2();
+            }
+        </script>
+        <table align="center">
+            <tr>
+                <td colspan="2" style="font-weight:bold;">Please enter your name:</td>        
+            </tr>
+            <tr>
+                <td id="nameFieldContainer"></td>
+                <td id="sendButtonContainer"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="color:red;" id="errorLabelContainer"></td>
+            </tr>
+        </table>
+        <button onclick="test()">Test GWT and JS</button>
+        <button onclick="clickIt()">Test GWT and JSX</button>
+    </body>
 </html>

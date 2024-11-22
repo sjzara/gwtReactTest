@@ -1,8 +1,18 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
+function Person2(personData) {
+    console.log(Object.keys(personData));
+    var id = personData.getId();
+    return <li>${id}</li>;
+}
 
-const myElement = <h1>I Love JSX!</h1>;
-const root = ReactDOM.createRoot(document.getElementById("react_holder"));
-root.render(myElement);
+function Persons2(personsList) {
+    const personData = personsList[0];
+    return <ul><Person2 personData /></ul>;
+}
 
-
+function test2() {
+    // Get data via JsInterop
+    const personData2 = net.spiffymap.Utils2.getExampleArray();
+    console.log("" + personData2);
+    const container = document.getElementById("jsx_container");
+    ReactDOM.render(Persons2(personData2), container);
+}
