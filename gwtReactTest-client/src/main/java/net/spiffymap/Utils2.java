@@ -11,6 +11,10 @@ import jsinterop.annotations.JsType;
 public class Utils2 {
 
     public static ListEntry[] getExampleArray() {
-        return new ListEntry[]{new ListEntry(2, "Jon", "Harley"),new ListEntry(4, "Someone", "Else")};
+        return new ListEntry[]{new ListEntry(2, "Jon", "Harley"), new ListEntry(4, "Someone", "Else")};
+    }
+
+    public static ListEntry getExampleEntry() {
+        return new ListEntry(1, "Steve", "Zara");
     }
 }

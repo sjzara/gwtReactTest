@@ -66,6 +66,8 @@
                 document.getElementById("react_holder").appendChild(Persons(personData));
                 // Get data via JsInterop
                 const personData2 = net.spiffymap.Utils2.getExampleArray();
+                const person = net.spiffymap.Utils2.getExampleEntry();
+                console.log(person.getId());
                 document.getElementById("react_holder").appendChild(Persons(personData2));
             }
         </script>
@@ -80,7 +82,23 @@
 
         <!-- JSX -->
         <div id="jsx_container"></div>
-        <script src="test.js" type="text/babel">
+        <script type="text/babel">
+            function Person2(personData) {
+                return <li> {personData.getId()} {personData.getForename()} {personData.getSurname()} </li>;
+            }
+
+            function Persons2(personsList) {
+                const personData = personsList[0];
+                return <ul> {Person2(personData)} </ul>;
+            }
+
+            function test2() {
+                // Get data via JsInterop
+                const personData2 = net.spiffymap.Utils2.getExampleArray();
+                console.log("" + personData2);
+                const container = document.getElementById("jsx_container");
+                ReactDOM.render(Persons2(personData2), container);
+            }
         </script>
 
         <script>
