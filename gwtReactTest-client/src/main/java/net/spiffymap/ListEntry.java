@@ -4,39 +4,32 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- *
  * @author steve
  */
 @JsType(namespace = JsPackage.GLOBAL)
-public class ListEntry {
-    private final  int id;
-    private final String forename;
-    private final String surname;
+public record ListEntry(int id, String forename, String surname) {
 
-    public ListEntry(int id, String forename, String surname) {
-        this.id = id;
-        this.forename = forename;
-        this.surname = surname;
-    }
-    
     /**
      * @return the id
      */
-    public int getId() {
+    @Override
+    public int id() {
         return id;
     }
 
     /**
-     * @return the foreame
+     * @return the foreName
      */
-    public String getForename() {
+    @Override
+    public String forename() {
         return forename;
     }
 
     /**
      * @return the surname
      */
-    public String getSurname() {
+    @Override
+    public String surname() {
         return surname;
     }
 
