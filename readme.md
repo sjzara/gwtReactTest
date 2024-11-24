@@ -37,17 +37,18 @@ Two services are needed for development:
 
 These can be run as follows:
 
-**Web application*
+**Web application**
 
-mvn jetty:run -pl *-server -am -Denv=dev
+*mvn jetty:run -pl \*-server -am -Denv=dev*
 
 **Code server**
 
-mvn gwt:codeserver -pl *-client -am
+*mvn gwt:codeserver -pl \*-client -am*
 
 The web application is then available at [http://localhost:8080](http://localhost:8080)
 
 * Development process
+
 
 ##### JavaScript integration
 
