@@ -1,0 +1,3 @@
+# Module app
+# RPC service class, partial path of RPC policy file
+net.spiffymap.GreetingService, B0274CCE72AA2B74A757888BAB1B33EF.gwt.rpc

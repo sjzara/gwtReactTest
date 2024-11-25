@@ -40,8 +40,11 @@ public class App implements EntryPoint {
     /**
      * This is the entry point method.
      */
+    @Override
     public void onModuleLoad() {
+        // Export Utils method for use in JavaScript
         Utils.exportMethod();
+        // Construct GWT-based UI
         final Button sendButton = new Button("Send");
         final TextBox nameField = new TextBox();
         nameField.setText("GWT User");
@@ -80,12 +83,10 @@ public class App implements EntryPoint {
         dialogBox.setWidget(dialogVPanel);
 
         // Add a handler to close the DialogBox
-        closeButton.addClickHandler(new ClickHandler() {
-            public void onClick(ClickEvent event) {
-                dialogBox.hide();
-                sendButton.setEnabled(true);
-                sendButton.setFocus(true);
-            }
+        closeButton.addClickHandler(event -> {
+            dialogBox.hide();
+            sendButton.setEnabled(true);
+            sendButton.setFocus(true);
         });
 
         // Create a handler for the sendButton and nameField
@@ -94,6 +95,7 @@ public class App implements EntryPoint {
             /**
              * Fired when the user clicks on the sendButton.
              */
+            @Override
             public void onClick(ClickEvent event) {
                 sendNameToServer();
             }
@@ -101,6 +103,7 @@ public class App implements EntryPoint {
             /**
              * Fired when the user types in the nameField.
              */
+            @Override
             public void onKeyUp(KeyUpEvent event) {
                 if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
                     sendNameToServer();
@@ -124,23 +127,36 @@ public class App implements EntryPoint {
                 sendButton.setEnabled(false);
                 textToServerLabel.setText(textToServer);
                 serverResponseLabel.setText("");
-                greetingService.greetServer(textToServer,
-                        new AsyncCallback<GreetingResponse>() {
+                // Calls to GWT services are provides with two callbacks - one for 
+                // success, another for failure.
+                greetingService.greetServer(textToServer, new AsyncCallback<GreetingResponse>() {
+
+                    /**
+                     * Call failed
+                     *
+                     * @param caught Exception resulting from the call, if
+                     * non-null
+                     */
+                    @Override
                     public void onFailure(Throwable caught) {
                         // Show the RPC error message to the user
-                        dialogBox
-                                .setText("Remote Procedure Call - Failure");
-                        serverResponseLabel
-                                .addStyleName("serverResponseLabelError");
+                        dialogBox.setText("Remote Procedure Call - Failure");
+                        serverResponseLabel.addStyleName("serverResponseLabelError");
                         serverResponseLabel.setHTML(SERVER_ERROR);
                         dialogBox.center();
                         closeButton.setFocus(true);
                     }
 
+                    /**
+                     * Call succeeded
+                     *
+                     * @param result object providing response data from the
+                     * call
+                     */
+                    @Override
                     public void onSuccess(GreetingResponse result) {
                         dialogBox.setText("Remote Procedure Call");
-                        serverResponseLabel
-                                .removeStyleName("serverResponseLabelError");
+                        serverResponseLabel.removeStyleName("serverResponseLabelError");
                         serverResponseLabel.setHTML(new SafeHtmlBuilder()
                                 .appendEscaped(result.getGreeting())
                                 .appendHtmlConstant("<br><br>I am running ")

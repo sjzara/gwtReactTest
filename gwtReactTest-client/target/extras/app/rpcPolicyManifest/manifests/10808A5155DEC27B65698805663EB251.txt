@@ -1,0 +1,2 @@
+serviceClass: net.spiffymap.GreetingService
+path: B0274CCE72AA2B74A757888BAB1B33EF.gwt.rpc

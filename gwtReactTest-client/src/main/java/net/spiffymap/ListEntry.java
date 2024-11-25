@@ -3,34 +3,12 @@ package net.spiffymap;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-/**
+/** 
+ * A an example of making a record type available to JavaScript.  JavaScript will have access to the
+ * automatically provided methods, such as accessors.
  * @author steve
  */
 @JsType(namespace = JsPackage.GLOBAL)
 public record ListEntry(int id, String forename, String surname) {
-
-    /**
-     * @return the id
-     */
-    @Override
-    public int id() {
-        return id;
-    }
-
-    /**
-     * @return the foreName
-     */
-    @Override
-    public String forename() {
-        return forename;
-    }
-
-    /**
-     * @return the surname
-     */
-    @Override
-    public String surname() {
-        return surname;
-    }
 
 }
