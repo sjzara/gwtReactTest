@@ -63,6 +63,11 @@
                 }
                 // Get data via JSNI
                 const personData = window.getExampleArray();
+                const holder = document.getElementById("react_holder");
+                // Clear entries
+                while(holder.lastElementChild) {
+                    holder.removeChild(holder.lastElementChild);
+                }
                 holder.appendChild(Persons(personData));
                 // Get data via JsInterop
                 const personData2 = net.spiffymap.Utils2.getExampleArray();
@@ -98,13 +103,6 @@
                 ReactDOM.render(Persons2(personData2), container);
             }
         </script>
-
-        <script>
-            function clickIt() {
-                alert('test');
-                test2();
-            }
-        </script>
         <table align="center">
             <tr>
                 <td colspan="2" style="font-weight:bold;">Please enter your name:</td>        
@@ -118,6 +116,6 @@
             </tr>
         </table>
         <button onclick="test()">Test GWT and JS</button>
-        <button onclick="clickIt()">Test GWT and JSX</button>
+        <button onclick="test2()">Test GWT and JSX</button>
     </body>
 </html>
