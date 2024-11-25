@@ -1,9 +1,4 @@
 <!doctype html>
-<!-- The DOCTYPE declaration above will set the     -->
-<!-- browser's rendering engine into                -->
-<!-- "Standards Mode". Replacing this declaration   -->
-<!-- with a "Quirks Mode" doctype is not supported. -->
-
 <html>
     <head>
         <!--                                                               -->
@@ -61,24 +56,28 @@
             }
 
             function test() {
+                // Clear list
+                const holder = document.getElementById("react_holder");
+                while (holder.lastElementChild) {
+                    holder.removeChild(holder.lastElementChild);
+                }
                 // Get data via JSNI
                 const personData = window.getExampleArray();
-                document.getElementById("react_holder").appendChild(Persons(personData));
+                holder.appendChild(Persons(personData));
                 // Get data via JsInterop
                 const personData2 = net.spiffymap.Utils2.getExampleArray();
                 const person = net.spiffymap.Utils2.getExampleEntry();
-                console.log(person.id());
-                document.getElementById("react_holder").appendChild(Persons(personData2));
+                holder.appendChild(Persons(personData2));
             }
         </script>
         <!-- babel is required in order to parse JSX -->
-        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <script src="babel.js"></script>
 
         <!-- import react.js -->
-        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="react.production.js"></script>
 
         <!-- import react-dom.js -->
-        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="react-dom.production.js"></script>
 
         <!-- JSX -->
         <div id="jsx_container"></div>
@@ -95,7 +94,6 @@
             function test2() {
                 // Get data via JsInterop
                 const personData2 = net.spiffymap.Utils2.getExampleArray();
-                console.log("" + personData2);
                 const container = document.getElementById("jsx_container");
                 ReactDOM.render(Persons2(personData2), container);
             }
