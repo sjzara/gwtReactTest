@@ -31,7 +31,7 @@ public class ListEntryTest extends GWTTestCase {
     public void testToString() {
         System.out.println("toString");
         ListEntry instance = new ListEntry(1, "Steve", "Smith");
-        String expResult = "";
+        String expResult = "ListEntry[id=1, forename=Steve, surname=Smith]";
         String result = instance.toString();
         assertEquals(expResult, result);
     }
